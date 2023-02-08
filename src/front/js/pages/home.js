@@ -12,7 +12,7 @@ export const Home = () => {
 
   const sendLogin = async () => {
     const response = await fetch(
-      "https://3001-4geeksacade-reactflaskh-y7dho6eaapi.ws-eu85.gitpod.io/api/login",
+      "https://3001-4geeksacade-reactflaskh-y7dho6eaapi.ws-eu86.gitpod.io/api/login",
       {
         method: "POST",
         headers: {
@@ -25,7 +25,7 @@ export const Home = () => {
       }
     );
     if (response.ok) {
-      const data = await response.JSON();
+      const data = await response.json();
       localStorage.setItem("token", data.token);
       navigate("/demo");
     } else {
@@ -36,7 +36,12 @@ export const Home = () => {
   return (
     <div className="log-form">
       <h2>Login to your account</h2>
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          sendLogin();
+        }}
+      >
         <input
           type="text"
           placeholder="Email"
@@ -52,7 +57,7 @@ export const Home = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit" className="btn" onClick={() => sendLogin()}>
+        <button type="submit" className="btn">
           Login
         </button>
         {error ? (
