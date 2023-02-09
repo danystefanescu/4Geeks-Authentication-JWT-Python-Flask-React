@@ -63,7 +63,7 @@ input {
   color: #585858;
 }
 
-.btn {
+.btn-customized {
   display: inline-block;
   background: #1fb5bf;
   border: 1px solid darken(#1fb5bf, 5%);

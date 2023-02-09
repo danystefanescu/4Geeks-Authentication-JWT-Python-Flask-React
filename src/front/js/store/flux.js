@@ -1,7 +1,9 @@
+import { Navigate } from "react-router-dom";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      currentUserEmail: "",
+      currentUserEmail: null,
     },
     actions: {
       getCurrentUserEmail: async () => {
@@ -14,8 +16,17 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         );
         const data = await response.json();
-        console.log(data.email);
         if (response.ok) setStore({ currentUserEmail: data.email });
+      },
+      logout: () => {
+        try {
+          localStorage.removeItem("token");
+          setStore({ currentUserEmail: null });
+          return true;
+        } catch (e) {
+          console.log(e);
+          return false;
+        }
       },
     },
   };
